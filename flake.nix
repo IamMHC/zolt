@@ -14,8 +14,8 @@
     {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
-          zig-overlay.packages.${system}.master  # Latest nightly build
-          # zig-overlay.packages.${system}."0.13.0"  # Specific version
+          # zig-overlay.packages.${system}.master  # Latest nightly build
+          zig-overlay.packages.${system}."0.15.2"  # Specific version
           pkgs.gtk4
           pkgs.glib
           pkgs.gobject-introspection
