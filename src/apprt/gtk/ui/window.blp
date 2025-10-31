@@ -1,0 +1,33 @@
+using Gtk 4.0;
+
+Gtk.ApplicationWindow window {
+  title: "Zolt";
+  default-width: 400;
+  default-height: 300;
+
+  Gtk.Box {
+    orientation: vertical;
+    spacing: 10;
+    styles ["app-container"]
+
+    Gtk.Label {
+      label: "Hello from GTK + Zig!";
+      styles ["app-title"]
+    }
+
+    Gtk.Label {
+      label: "UI defined in Blueprint with custom CSS";
+      styles ["app-subtitle"]
+    }
+
+    Gtk.Button demo_button {
+      label: "Click Me";
+      styles ["app-button", "suggested-action", "pill"]
+    }
+
+    Gtk.Entry demo_entry {
+      placeholder-text: "Type something...";
+      styles ["app-entry"]
+    }
+  }
+}
