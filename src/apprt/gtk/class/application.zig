@@ -2,10 +2,10 @@ const std = @import("std");
 const c = @import("../bindings.zig");
 
 pub const Application = struct {
-    app: *c.GtkApplication,
+    app: *c.AdwApplication,
 
     pub fn init(app_id: [:0]const u8) !Application {
-        const app = c.gtk_application_new(app_id.ptr, c.G_APPLICATION_DEFAULT_FLAGS) orelse
+        const app = c.adw_application_new(app_id.ptr, c.G_APPLICATION_DEFAULT_FLAGS) orelse
             return error.AppCreationFailed;
 
         return .{ .app = app };

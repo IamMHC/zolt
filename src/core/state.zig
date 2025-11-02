@@ -1,12 +1,14 @@
 const std = @import("std");
-const gobject = @import("../apprt/gtk/gobject.zig");
+const Diagnostics = @import("diagnostics.zig").Diagnostics;
 
 pub const AppState = struct {
     counter: u32,
+    diagnostics: Diagnostics,
 
     pub fn init() AppState {
         return .{
             .counter = 0,
+            .diagnostics = Diagnostics.init(),
         };
     }
 
@@ -14,10 +16,8 @@ pub const AppState = struct {
         self.counter += 1;
         std.debug.print("Counter: {}\n", .{self.counter});
     }
+
+    pub fn tick(self: *AppState) void {
+        self.diagnostics.tick();
+    }
 };
-
-pub const AppStateObject = gobject.GObjectWrapper(AppState);
-
-pub fn createAppState() *AppStateObject {
-    return AppStateObject.create(AppState.init());
-}

@@ -13,5 +13,5 @@ zig-out/
 /result*
 flatpak/builddir/
 flatpak/repo/
-
+memory_profile.sh
 

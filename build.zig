@@ -13,6 +13,11 @@ pub fn build(b: *std.Build) void {
         }),
     });
 
+    if (optimize != .Debug) {
+        exe.root_module.strip = true;
+    }
+
+    // Build GTK resources
     const blueprint_compile = b.addSystemCommand(&.{
         "blueprint-compiler",
         "compile",
@@ -51,6 +56,7 @@ pub fn build(b: *std.Build) void {
 
     exe.linkLibC();
     exe.linkSystemLibrary("gtk4");
+    exe.linkSystemLibrary("adwaita-1");
     exe.linkSystemLibrary("gobject-2.0");
     exe.linkSystemLibrary("glib-2.0");
 

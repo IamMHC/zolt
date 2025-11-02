@@ -17,6 +17,7 @@
           # zig-overlay.packages.${system}.master  # Latest nightly build
           zig-overlay.packages.${system}."0.15.2"  # Specific version
           pkgs.gtk4
+          pkgs.libadwaita
           pkgs.glib
           pkgs.gobject-introspection
           pkgs.pkg-config
@@ -24,7 +25,7 @@
         ];
 
         shellHook = ''
-          export PKG_CONFIG_PATH="${pkgs.gtk4}/lib/pkgconfig:${pkgs.glib}/lib/pkgconfig:$PKG_CONFIG_PATH"
+          export PKG_CONFIG_PATH="${pkgs.gtk4}/lib/pkgconfig:${pkgs.libadwaita}/lib/pkgconfig:${pkgs.glib}/lib/pkgconfig:$PKG_CONFIG_PATH"
         '';
       };
     };

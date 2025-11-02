@@ -1,33 +1,113 @@
 using Gtk 4.0;
+using Adw 1;
 
-Gtk.ApplicationWindow window {
-  title: "Zolt";
-  default-width: 400;
-  default-height: 300;
+Adw.ApplicationWindow window {
+  default-width: 1000;
+  default-height: 700;
 
-  Gtk.Box {
-    orientation: vertical;
-    spacing: 10;
-    styles ["app-container"]
+  content: Gtk.Overlay {
+    [overlay]
+    Gtk.Box diagnostics_overlay {
+      orientation: vertical;
+      halign: end;
+      valign: start;
+      margin-top: 60;
+      margin-end: 12;
+      styles ["card"]
 
-    Gtk.Label {
-      label: "Hello from GTK + Zig!";
-      styles ["app-title"]
+      Gtk.Label diagnostics_label {
+        label: "";
+        margin-start: 12;
+        margin-end: 12;
+        margin-top: 8;
+        margin-bottom: 8;
+        styles ["monospace"]
+      }
     }
 
-    Gtk.Label {
-      label: "UI defined in Blueprint with custom CSS";
-      styles ["app-subtitle"]
+    Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar header_bar {
+      title-widget: Adw.WindowTitle {
+        title: "Zolt";
+      };
+
+      [end]
+      Gtk.MenuButton menu_button {
+        icon-name: "open-menu-symbolic";
+        menu-model: primary_menu;
+      }
     }
 
-    Gtk.Button demo_button {
-      label: "Click Me";
-      styles ["app-button", "suggested-action", "pill"]
-    }
+    content: Gtk.Box {
+      orientation: vertical;
 
-    Gtk.Entry demo_entry {
-      placeholder-text: "Type something...";
-      styles ["app-entry"]
+      Gtk.Paned main_paned {
+        orientation: horizontal;
+        shrink-start-child: false;
+        shrink-end-child: false;
+        position: 250;
+
+        [start]
+        Gtk.Box sidebar_box {
+          orientation: vertical;
+          width-request: 200;
+          spacing: 0;
+          styles ["navigation-sidebar"]
+
+          Gtk.ScrolledWindow {
+            vexpand: true;
+            hscrollbar-policy: never;
+
+            Gtk.Box sidebar_buttons {
+              orientation: vertical;
+              spacing: 4;
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+            }
+          }
+        }
+
+        [end]
+        Gtk.Box content_box {
+          orientation: vertical;
+          hexpand: true;
+
+          Gtk.ScrolledWindow {
+            vexpand: true;
+            hexpand: true;
+
+            Adw.Clamp {
+              maximum-size: 800;
+              margin-top: 24;
+              margin-bottom: 24;
+              margin-start: 12;
+              margin-end: 12;
+
+              Gtk.Box content_area {
+                orientation: vertical;
+                spacing: 24;
+              }
+            }
+          }
+        }
+      }
+    };
+    }
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: "Preferences";
+      action: "app.preferences";
+    }
+    item {
+      label: "About";
+      action: "app.about";
     }
   }
 }
